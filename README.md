@@ -102,15 +102,9 @@ web       nginx:alpine     "/docker-entrypoint.…"   web       10 minutes ago  
 
 ### 🖼️ Evidência 3: Resposta do `redis-cli ping` (PONG) executado dentro do container do banco
 
-Comando executado:
-```bash
-docker compose exec banco redis-cli ping
-```
+- **Banco container (`redis-cli`):**
+![Banco container](loja-docker/entrega/prints/05-pong-banco.png)
 
-Saída obtida:
-```text
-PONG
-```
 > *Observação: Comprova que o banco de dados Redis está operacional e acessível de dentro da rede privada `interna`.*
 
 ---
