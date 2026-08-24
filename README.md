@@ -81,10 +81,10 @@ server {
 ### 🖼️ Evidência 1: Vitrine em `localhost:8080` e API em `localhost:8080/api/` (via Proxy Reverso)
 
 - **Vitrine Web (`http://localhost:8080`):**
-![Vitrine Web](prints/01-vitrine-localhost-8080.png)
+![Vitrine Web](entrega/prints/01-vitrine-localhost-8080.png)
 
 - **API via Proxy Reverso (`http://localhost:8080/api/`):**
-![API via Proxy](prints/02-api-via-proxy.png)
+![API via Proxy](entrega/prints/02-api-via-proxy.png)
 
 ---
 
