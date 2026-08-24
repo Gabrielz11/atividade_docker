@@ -181,3 +181,28 @@ web       nginx:alpine     "/docker-entrypoint.…"   web       10 minutes ago  
 > **Resposta:**  
 > 1. **Redução da Superfície de Ataque (Segurança):** O banco de dados e a API ficam inacessíveis para varreduras de portas ou ataques diretos vindos da internet.  
 > 2. **Desacoplamento e Independência de Camadas:** Permite realizar manutenções, escalonamento e atualizações no backend sem afetar a disponibilidade da vitrine estática, além de esconder a topologia interna da rede.
+---
+
+### ❓ Questão 5 — Volume e Armazenamento de Bloco
+**O que o volume `dados-banco` representa em termos de nuvem e o que aconteceria sem ele?**
+
+> **Resposta:**  
+> O volume `dados-banco` do Redis representa armazenamento persistente semelhante ao **armazenamento de bloco (EBS na AWS)**, pois mantém os arquivos utilizados pelo banco independentemente do ciclo de vida do container. Sem o volume, os dados mantidos apenas no filesystem efêmero do container seriam perdidos quando ele fosse removido com `docker compose down`. O volume nomeado preserva esses dados em disco para reutilização após a recriação do serviço, assim como um disco EBS sobrevive à terminação de uma instância EC2.
+
+---
+
+### ❓ Questão 6 — Imagens e Armazenamento de Objetos
+**Por que as imagens dos produtos são armazenadas em Object Storage (MinIO/S3) e não no banco de dados?**
+
+> **Resposta:**  
+> Imagens são arquivos não estruturados e se encaixam melhor em armazenamento de objetos. O MinIO representa esse modelo, no qual arquivos são armazenados como **objetos dentro de buckets**, de forma semelhante ao Amazon S3. Dessa maneira, o banco Redis continua responsável pelos dados estruturados da aplicação (chave-valor), enquanto imagens e outros arquivos binários ficam em um serviço específico para objetos, com suporte nativo a versionamento, metadados e políticas de ciclo de vida.
+
+---
+
+### ❓ Questão 7 — Versionamento e Ciclo de Vida
+**Como o versionamento protege contra erros e qual o cuidado com custo de armazenamento?**
+
+> **Resposta:**  
+> O versionamento mantém versões anteriores quando um objeto é sobrescrito, permitindo recuperar uma imagem apagada ou substituída por engano. Isso reduz drasticamente o impacto de erros humanos. Como versões antigas ocupam espaço adicional, pode-se utilizar uma **Política de Ciclo de Vida (Lifecycle Policy)** para excluir automaticamente versões não atuais após determinado período (ex: 30 dias) ou, em provedores de nuvem que ofereçam classes de armazenamento, movê-las para uma opção mais econômica (ex: S3 Glacier na AWS).
+
+---
