@@ -81,10 +81,10 @@ server {
 ### 🖼️ Evidência 1: Vitrine em `localhost:8080` e API em `localhost:8080/api/` (via Proxy Reverso)
 
 - **Vitrine Web (`http://localhost:8080`):**
-![Vitrine Web](entrega/prints/01-vitrine-localhost-8080.png)
+![Vitrine Web](loja-docker/entrega/prints/01-vitrine-localhost-8080.png)
 
 - **API via Proxy Reverso (`http://localhost:8080/api/`):**
-![API via Proxy](entrega/prints/02-api-via-proxy.png)
+![API via Proxy](loja-docker/entrega/prints/02-api-via-proxy.png)
 
 ---
 
@@ -123,10 +123,10 @@ PONG
    ```
 
 2. **Acesso à Vitrine (`http://localhost:8080`):** A vitrine continua funcionando perfeitamente, servindo o HTML estático.
-![Vitrine com API Parada](prints/03-home-api-parada.png)
+![Vitrine com API Parada](loja-docker/entrega/prints/03-home-api-parada.png)
 
 3. **Chamada à Rota `/api/`:** O Nginx indica falha na conexão com o backend privado, demonstrando que a queda ficou contida apenas na camada de aplicação.
-![Erro na API Parada](prints/04-api-parada-erro.png)
+![Erro na API Parada](loja-docker/entrega/prints/04-api-parada-erro.png)
 
 ---
 
