@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loja Online - Arquitetura 3 Camadas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --accent-green: #10b981;
+            --accent-blue: #3b82f6;
+            --accent-purple: #8b5cf6;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #60a5fa, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        .badge-public {
+            display: inline-block;
+            background-color: rgba(16, 185, 129, 0.15);
+            color: var(--accent-green);
+            border: 1px solid var(--accent-green);
+            padding: 0.3rem 0.8rem;
+            border-radius: 9999px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 0.8rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            border-color: #475569;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .dot-green { background-color: var(--accent-green); box-shadow: 0 0 8px var(--accent-green); }
+        .dot-blue { background-color: var(--accent-blue); box-shadow: 0 0 8px var(--accent-blue); }
+        .dot-purple { background-color: var(--accent-purple); box-shadow: 0 0 8px var(--accent-purple); }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .tag {
+            display: inline-block;
+            font-size: 0.75rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            margin-top: 1rem;
+            font-weight: 600;
+        }
+
+        .tag-public { background: rgba(16, 185, 129, 0.2); color: #34d399; }
+        .tag-private { background: rgba(239, 68, 68, 0.2); color: #f87171; }
+
+        .api-section {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .api-section h2 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: opacity 0.2s ease;
+            margin-bottom: 1rem;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        pre {
+            background-color: #090d16;
+            border: 1px solid #1e293b;
+            border-radius: 8px;
+            padding: 1rem;
+            font-family: monospace;
+            font-size: 0.88rem;
+            color: #38bdf8;
+            overflow-x: auto;
+            min-height: 120px;
+        }
+
+        footer {
+            margin-top: 3rem;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>🛒 Loja Online — Vitrine Web</h1>
+            <p>Computação em Nuvem · Implantação de Aplicação em 3 Camadas com Docker</p>
+            <span class="badge-public">🌐 Camada Pública (Frontend) Exposta em localhost:8080</span>
+        </header>
+
+        <div class="grid">
+            <!-- Camada 1: Web -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">1. Vitrine (Web)</span>
+                    <span class="status-dot dot-green"></span>
+                </div>
+                <p>Servidor Nginx atuando como Vitrine Web e Proxy Reverso para rotas internas.</p>
+                <span class="tag tag-public">PÚBLICA (Porta 8080)</span>
+            </div>
+
+            <!-- Camada 2: API -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">2. API Interna</span>
+                    <span class="status-dot dot-blue"></span>
+                </div>
+                <p>Serviço backend <code>traefik/whoami</code> acessível somente através de <code>/api/</code> via Proxy Reverso.</p>
+                <span class="tag tag-private">PRIVADA (Sem Porta Host)</span>
+            </div>
+
+            <!-- Camada 3: Banco -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">3. Banco de Dados</span>
+                    <span class="status-dot dot-purple"></span>
+                </div>
+                <p>Servidor Redis para armazenamento de dados e sessão. Apenas a API e o Proxy podem comunicá-lo.</p>
+                <span class="tag tag-private">PRIVADO (Sem Porta Host)</span>
+            </div>
+        </div>
+
+        <div class="api-section">
+            <h2>⚡ Teste de Comunicação com a API Privada (/api/)</h2>
+            <p style="color: var(--text-muted); margin-bottom: 1rem; font-size: 0.9rem;">
+                Clique no botão abaixo para requisitar a rota <code>/api/</code>. O Nginx irá reencaminhar a requisição para o container privado da API.
+            </p>
+            <button class="btn" onclick="testApi()">Chamar API (/api/)</button>
+            <pre id="api-output">Clique em "Chamar API" para visualizar os dados do container da API...</pre>
+        </div>
+
+        <footer>
+            <p>ULBRA - Computação em Nuvem · Atividade Avaliativa de Isolamento Docker</p>
+        </footer>
+    </div>
+
+    <script>
+        async function testApi() {
+            const output = document.getElementById('api-output');
+            output.textContent = 'Carregando dados da API...';
+            try {
+                const response = await fetch('/api/');
+                if (!response.ok) {
+                    throw new Error(`Erro HTTP ${response.status}: ${response.statusText}`);
+                }
+                const text = await response.text();
+                output.textContent = text;
+            } catch (err) {
+                output.textContent = `❌ Erro de conexão com /api/:\n${err.message}`;
+            }
+        }
+    </script>
+</body>
+</html>
