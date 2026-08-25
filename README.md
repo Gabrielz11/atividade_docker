@@ -1,7 +1,7 @@
 # 📄 Relatório de Entrega — Atividade Avaliativa de Computação em Nuvem
 ## Implantação de uma Aplicação de Três Camadas com Docker
-
-**Aluno:** Gabriel  
+ 
+**Aluno:** Gabriel Vaz Aires
 **Disciplina:** Computação em Nuvem  
 **Instituição:** ULBRA  
 **Projeto:** Loja Online (`loja-docker`)  
